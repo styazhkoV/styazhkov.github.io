@@ -24,12 +24,10 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 		</header>
 
 		<main class="max-w-6xl mx-auto px-4 py-12">
-			<section class="mb-16">
-				<h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">Портфолио системного аналитика</h2>
-				<p class="text-xl text-slate-600 max-w-2xl">
-					Специализируюсь на проектировании API, миграции данных и описании бизнес-процессов. Здесь я собираю практические кейсы.
-				</p>
-			</section>
+			<section id="cases" class="mb-16">
+    <h2 class="text-2xl mb-4">Мои кейсы:</h2>
+    ...
+</section>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{sortedPosts.map(post => (
