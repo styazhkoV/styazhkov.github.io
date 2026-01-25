@@ -23,37 +23,52 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 			</div>
 		</header>
 
-		<main class="max-w-6xl mx-auto px-4 py-12">
-			<section id="cases" class="mb-16">
-    <h2 class="text-2xl mb-4">Мои кейсы:</h2>
-    ...
-</section>
+		<header class="bg-white border-b sticky top-0 z-10">
+            <div class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
+                <h1 class="text-xl font-bold tracking-tight text-blue-600">STYAZHKOV.ANALYSIS</h1>
+                <nav class="space-x-6 text-sm font-medium">
+                    <a href="#cases" class="text-slate-600 hover:text-blue-600 transition">Кейсы</a>
+                    <a href="https://github.com/styazhkoV" target="_blank" class="hover:text-blue-600 transition">GitHub</a>
+                </nav>
+            </div>
+        </header>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{sortedPosts.map(post => (
-					<a href={`/blog/${post.slug}`} class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
-						<div class="flex flex-wrap gap-2 mb-4">
-							{post.data.tags.map(tag => (
-								<span class="text-[10px] uppercase tracking-wider font-bold bg-slate-100 text-slate-500 px-2 py-1 rounded">
-									{tag}
-								</span>
-							))}
-						</div>
-						<h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
-							{post.data.title}
-						</h3>
-						<p class="text-slate-600 text-sm line-clamp-3 mb-6">
-							{post.data.description}
-						</p>
-						<div class="text-blue-600 font-semibold text-sm flex items-center">
-							Читать кейс 
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-							</svg>
-						</div>
-					</a>
-				))}
-			</div>
-		</main>
+        <main class="max-w-6xl mx-auto px-4 py-12">
+            <section class="mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">Портфолио системного аналитика</h2>
+                <p class="text-xl text-slate-600 max-w-2xl">
+                    Проектирую интеграции, описываю требования и создаю прозрачные модели данных.
+                </p>
+            </section>
+
+            <section id="cases" class="scroll-mt-24"> 
+                <h2 class="text-2xl font-bold mb-8 text-slate-800">Мои кейсы:</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {sortedPosts.map(post => (
+                        <a href={`/blog/${post.slug}`} class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                {post.data.tags.map(tag => (
+                                    <span class="text-[10px] uppercase tracking-wider font-bold bg-slate-100 text-slate-500 px-2 py-1 rounded">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                                {post.data.title}
+                            </h3>
+                            <p class="text-slate-600 text-sm line-clamp-3 mb-6">
+                                {post.data.description}
+                            </p>
+                            <div class="text-blue-600 font-semibold text-sm flex items-center">
+                                Читать кейс 
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </section>
+        </main>
 	</body>
 </html>
