@@ -1,26 +1,36 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-const posts = await getCollection('blog');
-const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = await getCollection("blog");
+const sortedPosts = posts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Стяжков | System Analyst Portfolio">
     <main class="max-w-6xl mx-auto px-4 py-12">
         <section class="mb-16">
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">Портфолио системного аналитика</h2>
-            <p class="text-xl text-slate-600 max-w-2xl">Проектирую интеграции и создаю модели данных.</p>
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">
+                Портфолио системного аналитика
+            </h2>
+            <p class="text-xl text-slate-600 max-w-2xl">
+                Проектирую интеграции и создаю модели данных.
+            </p>
         </section>
 
         <section id="cases" class="scroll-mt-28">
             <h2 class="text-2xl font-bold mb-8 text-slate-800">Мои кейсы</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {sortedPosts.map(post => (
-                    <a href={`${baseUrl}/blog/${post.slug}`} class="...">
-                        </a>
-                ))}
+                {
+                    sortedPosts.map((post) => (
+                        <a
+                            href={`${baseUrl}/blog/${post.slug}`}
+                            class="..."
+                        ></a>
+                    ))
+                }
             </div>
         </section>
     </main>
