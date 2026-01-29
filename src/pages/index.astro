@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Card from "../components/Card.astro";
 import SkillBadge from "../components/SkillBadge.astro";
 import ContactForm from "../components/ContactForm.astro";
+import CertificatesCarousel from "../components/CertificatesCarousel.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("blog");
@@ -177,6 +178,9 @@ const experience = [
             </div>
         </div>
     </section>
+
+    <!-- Certificates Section -->
+    <CertificatesCarousel />
 
     <!-- Experience Section -->
     <section class="section bg-primary">

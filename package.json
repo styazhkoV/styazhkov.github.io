@@ -12,6 +12,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.15",
     "mermaid": "^10.9.5",
+    "swiper": "^12.1.0",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {

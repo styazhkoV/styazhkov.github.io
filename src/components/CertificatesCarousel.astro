@@ -1,0 +1,272 @@
+---
+import certificates from "../data/certificates.json";
+---
+
+<section id="certificates" class="section bg-primary">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="section-title">Сертификаты</h2>
+            <p class="section-subtitle mx-auto">
+                Подтвержденные квалификации и профессиональные достижения
+            </p>
+        </div>
+
+        <div class="swiper certificates-swiper">
+            <div class="swiper-wrapper">
+                {
+                    certificates.map((cert) => (
+                        <div class="swiper-slide">
+                            <a
+                                href={cert.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="certificate-card block"
+                            >
+                                <div class="certificate-image">
+                                    <img
+                                        src={cert.image}
+                                        alt={cert.title}
+                                        loading="lazy"
+                                    />
+                                    <div class="certificate-overlay">
+                                        <svg
+                                            class="w-8 h-8 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="certificate-content">
+                                    <span class="certificate-issuer">
+                                        {cert.issuer}
+                                    </span>
+                                    <h3 class="certificate-title">
+                                        {cert.title}
+                                    </h3>
+                                    <span class="certificate-date">
+                                        {cert.date}
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Navigation -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Swiper base styles */
+    .certificates-swiper {
+        padding: 20px 0 60px;
+        overflow: hidden;
+    }
+
+    .swiper-slide {
+        height: auto;
+    }
+
+    /* Certificate card */
+    .certificate-card {
+        display: block;
+        background-color: var(--color-bg-secondary);
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .certificate-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--color-accent);
+        box-shadow:
+            0 20px 40px -12px rgba(0, 0, 0, 0.15),
+            0 0 20px rgba(59, 130, 246, 0.15);
+    }
+
+    :global(.dark) .certificate-card:hover {
+        box-shadow:
+            0 20px 40px -12px rgba(0, 0, 0, 0.4),
+            0 0 30px rgba(96, 165, 250, 0.2);
+    }
+
+    /* Certificate image */
+    .certificate-image {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        background-color: var(--color-bg-tertiary);
+        overflow: hidden;
+    }
+
+    .certificate-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .certificate-card:hover .certificate-image img {
+        transform: scale(1.05);
+    }
+
+    .certificate-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(59, 130, 246, 0.8),
+            rgba(139, 92, 246, 0.8)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .certificate-card:hover .certificate-overlay {
+        opacity: 1;
+    }
+
+    /* Certificate content */
+    .certificate-content {
+        padding: 1.25rem;
+    }
+
+    .certificate-issuer {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: linear-gradient(
+            135deg,
+            var(--color-gradient-start),
+            var(--color-gradient-end)
+        );
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 9999px;
+        margin-bottom: 0.75rem;
+    }
+
+    .certificate-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+    }
+
+    .certificate-date {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+    }
+
+    /* Swiper navigation */
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 48px;
+        height: 48px;
+        background-color: var(--color-bg-secondary);
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        transition: all 0.2s ease;
+    }
+
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+    }
+
+    .swiper-button-prev:hover::after,
+    .swiper-button-next:hover::after {
+        color: white;
+    }
+
+    /* Swiper pagination */
+    :global(.swiper-pagination-bullet) {
+        width: 10px;
+        height: 10px;
+        background-color: var(--color-border);
+        opacity: 1;
+        transition: all 0.2s ease;
+    }
+
+    :global(.swiper-pagination-bullet-active) {
+        background: linear-gradient(
+            135deg,
+            var(--color-gradient-start),
+            var(--color-gradient-end)
+        );
+        width: 24px;
+        border-radius: 5px;
+    }
+
+    /* Hide navigation on mobile */
+    @media (max-width: 768px) {
+        .swiper-button-prev,
+        .swiper-button-next {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    import Swiper from "swiper";
+    import { Navigation, Pagination, Autoplay } from "swiper/modules";
+    import "swiper/css";
+    import "swiper/css/navigation";
+    import "swiper/css/pagination";
+
+    new Swiper(".certificates-swiper", {
+        modules: [Navigation, Pagination, Autoplay],
+        slidesPerView: 1,
+        spaceBetween: 24,
+        loop: true,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        },
+    });
+</script>

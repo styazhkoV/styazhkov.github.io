@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Microsoft Certified: Azure Fundamentals",
+        "issuer": "Microsoft",
+        "image": "/certificates/azure-fundamentals.png",
+        "link": "https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/",
+        "date": "2025"
+    },
+    {
+        "title": "Professional Scrum Master I",
+        "issuer": "Scrum.org",
+        "image": "/certificates/psm-1.png",
+        "link": "https://www.scrum.org/certifications/professional-scrum-master-i-certification",
+        "date": "2024"
+    },
+    {
+        "title": "BPMN 2.0 Professional",
+        "issuer": "OMG",
+        "image": "/certificates/bpmn-professional.png",
+        "link": "https://www.omg.org/oceb-2/",
+        "date": "2024"
+    },
+    {
+        "title": "SQL Advanced Certificate",
+        "issuer": "HackerRank",
+        "image": "/certificates/sql-advanced.png",
+        "link": "https://www.hackerrank.com/certificates/sql_advanced",
+        "date": "2023"
+    },
+    {
+        "title": "REST API Design",
+        "issuer": "Coursera",
+        "image": "/certificates/rest-api-design.png",
+        "link": "https://www.coursera.org/",
+        "date": "2023"
+    }
+]
