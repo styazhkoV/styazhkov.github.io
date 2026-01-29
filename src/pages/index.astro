@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
+import SkillBadge from "../components/SkillBadge.astro";
+import ContactForm from "../components/ContactForm.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("blog");
@@ -7,28 +10,262 @@ const sortedPosts = posts.sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const baseUrl = import.meta.env.BASE_URL;
+
+// Skills data
+const skills = [
+    "BPMN",
+    "UML",
+    "SQL",
+    "REST API",
+    "Сбор требований",
+    "Интеграции",
+    "Confluence",
+    "Jira",
+    "Figma",
+    "Swagger",
+];
+
+// Experience data
+const experience = [
+    {
+        title: "Системный аналитик",
+        company: "IT-компания",
+        period: "2022 — настоящее время",
+        description:
+            "Проектирование интеграций, разработка API-спецификаций, моделирование бизнес-процессов",
+    },
+    {
+        title: "Бизнес-аналитик",
+        company: "Финтех стартап",
+        period: "2020 — 2022",
+        description:
+            "Сбор и анализ требований, создание user stories, работа с stakeholders",
+    },
+    {
+        title: "Junior аналитик",
+        company: "Консалтинговая компания",
+        period: "2018 — 2020",
+        description: "Документирование процессов, подготовка ТЗ, тестирование",
+    },
+];
 ---
 
-<BaseLayout title="Стяжков | System Analyst Portfolio">
-    <main class="max-w-6xl mx-auto px-4 py-12">
-        <section class="mb-16">
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">
-                Портфолио системного аналитика
-            </h2>
-            <p class="text-xl text-slate-600 max-w-2xl">
-                Проектирую интеграции и создаю модели данных.
-            </p>
-        </section>
+<BaseLayout title="Стяжков | Системный и бизнес-аналитик">
+    <!-- Hero Section -->
+    <section id="about" class="section bg-primary">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-in-up">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-tertiary rounded-full text-sm text-secondary mb-6"
+                    >
+                        <span
+                            class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                        ></span>
+                        Открыт к новым проектам
+                    </div>
 
-        <section id="cases" class="scroll-mt-28">
-            <h2 class="text-2xl font-bold mb-8 text-slate-800">Мои кейсы</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <h1
+                        class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight"
+                    >
+                        Системный и
+                        <span class="text-gradient">бизнес-аналитик</span>
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-secondary mb-8 max-w-xl">
+                        Проектирую интеграции, моделирую бизнес-процессы и
+                        создаю документацию, которую читают с удовольствием.
+                        Помогаю командам превращать размытые требования в
+                        работающие решения.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#cases" class="btn btn-primary">
+                            <svg
+                                class="w-5 h-5 mr-2"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                ></path>
+                            </svg>
+                            Смотреть кейсы
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <svg
+                                class="w-5 h-5 mr-2"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                                ></path>
+                            </svg>
+                            Обсудить проект
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex justify-center">
+                    <div class="relative">
+                        <div
+                            class="w-72 h-72 rounded-full accent-gradient opacity-20 blur-3xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                        >
+                        </div>
+                        <div
+                            class="relative z-10 w-64 h-64 rounded-2xl bg-secondary border border-themed flex items-center justify-center"
+                        >
+                            <svg
+                                class="w-32 h-32 text-gradient"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="url(#gradient)"
+                                stroke-width="1.5"
+                            >
+                                <defs>
+                                    <linearGradient
+                                        id="gradient"
+                                        x1="0%"
+                                        y1="0%"
+                                        x2="100%"
+                                        y2="100%"
+                                    >
+                                        <stop
+                                            offset="0%"
+                                            style="stop-color: var(--color-gradient-start)"
+                                        ></stop>
+                                        <stop
+                                            offset="100%"
+                                            style="stop-color: var(--color-gradient-end)"
+                                        ></stop>
+                                    </linearGradient>
+                                </defs>
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section bg-secondary">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="section-title">Ключевые навыки</h2>
+                <p class="section-subtitle mx-auto">
+                    Инструменты и методологии, которые использую в работе
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3">
+                {skills.map((skill) => <SkillBadge name={skill} />)}
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section bg-primary">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="section-title">Опыт работы</h2>
+                <p class="section-subtitle mx-auto">
+                    Профессиональный путь в IT-аналитике
+                </p>
+            </div>
+
+            <div class="space-y-0">
                 {
-                    sortedPosts.map((post) => (
-                        <a href={`${baseUrl}/blog/${post.slug}`} class="..." />
+                    experience.map((job) => (
+                        <div class="timeline-item">
+                            <div class="card p-6">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                                    <h3 class="text-lg font-bold text-primary">
+                                        {job.title}
+                                    </h3>
+                                    <span class="tag">{job.period}</span>
+                                </div>
+                                <p class="text-accent font-medium mb-2">
+                                    {job.company}
+                                </p>
+                                <p class="text-secondary text-sm">
+                                    {job.description}
+                                </p>
+                            </div>
+                        </div>
                     ))
                 }
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Cases Section -->
+    <section id="cases" class="section bg-secondary">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="section-title">Мои кейсы</h2>
+                <p class="section-subtitle mx-auto">
+                    Примеры проектов и выполненных задач
+                </p>
+            </div>
+
+            {
+                sortedPosts.length > 0 ? (
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {sortedPosts.map((post) => (
+                            <Card
+                                title={post.data.title}
+                                description={post.data.description}
+                                href={`${baseUrl}blog/${post.slug}`}
+                                image={post.data.heroImage}
+                                tags={post.data.tags}
+                                date={post.data.pubDate}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div class="text-center py-12">
+                        <div class="w-24 h-24 mx-auto mb-6 rounded-2xl bg-tertiary flex items-center justify-center">
+                            <svg
+                                class="w-12 h-12 text-muted"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-secondary mb-2">
+                            Кейсы скоро появятся
+                        </h3>
+                        <p class="text-muted">
+                            Работаю над описанием интересных проектов
+                        </p>
+                    </div>
+                )
+            }
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <ContactForm />
 </BaseLayout>

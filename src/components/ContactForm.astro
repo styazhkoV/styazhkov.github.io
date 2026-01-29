@@ -1,0 +1,173 @@
+---
+// Placeholder URL for Google Apps Script
+const SCRIPT_URL =
+    import.meta.env.PUBLIC_GOOGLE_SCRIPT_URL ||
+    "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+---
+
+<section id="contact" class="section bg-secondary">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="section-title text-gradient">Обсудить проект</h2>
+            <p class="section-subtitle mx-auto">
+                Опишите вашу задачу, и я свяжусь с вами для обсуждения деталей
+            </p>
+        </div>
+
+        <form id="contact-form" class="card p-8 md:p-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label
+                        for="name"
+                        class="block text-sm font-medium text-secondary mb-2"
+                    >
+                        Имя
+                    </label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        class="input"
+                        placeholder="Как к вам обращаться?"
+                    />
+                </div>
+
+                <div>
+                    <label
+                        for="email"
+                        class="block text-sm font-medium text-secondary mb-2"
+                    >
+                        Email
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        class="input"
+                        placeholder="your@email.com"
+                    />
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label
+                    for="message"
+                    class="block text-sm font-medium text-secondary mb-2"
+                >
+                    Описание задачи
+                </label>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                    class="input resize-none"
+                    placeholder="Расскажите о вашем проекте: какие задачи нужно решить, какие системы интегрировать, какие процессы автоматизировать..."
+                ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full md:w-auto">
+                <svg
+                    class="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+                Отправить заявку
+            </button>
+
+            <!-- Status messages -->
+            <div id="form-status" class="mt-4 hidden">
+                <div
+                    id="form-success"
+                    class="hidden p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg"
+                >
+                    ✓ Заявка успешно отправлена! Я свяжусь с вами в ближайшее
+                    время.
+                </div>
+                <div
+                    id="form-error"
+                    class="hidden p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg"
+                >
+                    ✕ Произошла ошибка. Пожалуйста, попробуйте позже или
+                    напишите мне напрямую.
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script define:vars={{ SCRIPT_URL }}>
+    const form = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
+    const formSuccess = document.getElementById("form-success");
+    const formError = document.getElementById("form-error");
+
+    form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            message: formData.get("message"),
+        };
+
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+            <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Отправка...
+        `;
+
+        try {
+            // Check if script URL is configured
+            if (SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+                // Demo mode - simulate success
+                console.log("Demo mode: Form data:", data);
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+
+                formStatus.classList.remove("hidden");
+                formSuccess.classList.remove("hidden");
+                formError.classList.add("hidden");
+                form.reset();
+            } else {
+                // Real submission to Google Apps Script
+                const response = await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors", // Required for Google Apps Script
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                formStatus.classList.remove("hidden");
+                formSuccess.classList.remove("hidden");
+                formError.classList.add("hidden");
+                form.reset();
+            }
+        } catch (error) {
+            console.error("Form submission error:", error);
+            formStatus.classList.remove("hidden");
+            formError.classList.remove("hidden");
+            formSuccess.classList.add("hidden");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
+</script>

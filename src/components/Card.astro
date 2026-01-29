@@ -1,0 +1,87 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    href: string;
+    image?: string;
+    tags?: string[];
+    date?: Date;
+}
+
+const { title, description, href, image, tags = [], date } = Astro.props;
+
+const formattedDate = date
+    ? new Intl.DateTimeFormat("ru-RU", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+      }).format(date)
+    : null;
+---
+
+<a href={href} class="card block overflow-hidden group">
+    {
+        image && (
+            <div class="aspect-video overflow-hidden bg-tertiary">
+                <img
+                    src={image}
+                    alt={title}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+            </div>
+        )
+    }
+
+    <div class="p-6">
+        {
+            tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-3">
+                    {tags.slice(0, 3).map((tag) => (
+                        <span class="tag">{tag}</span>
+                    ))}
+                    {tags.length > 3 && (
+                        <span class="text-muted text-xs">
+                            +{tags.length - 3}
+                        </span>
+                    )}
+                </div>
+            )
+        }
+
+        <h3
+            class="text-lg font-bold mb-2 text-primary group-hover:text-gradient transition-colors"
+        >
+            {title}
+        </h3>
+
+        <p class="text-secondary text-sm line-clamp-2 mb-4">
+            {description}
+        </p>
+
+        {
+            formattedDate && (
+                <div class="flex items-center gap-2 text-muted text-xs">
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                    </svg>
+                    <time datetime={date?.toISOString()}>{formattedDate}</time>
+                </div>
+            )
+        }
+    </div>
+
+    <div
+        class="h-1 w-0 accent-gradient transition-all duration-300 group-hover:w-full"
+    >
+    </div>
+</a>
