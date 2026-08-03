@@ -1,0 +1,50 @@
+---
+title: "Интеграция с Oracle и REST API"
+description: "Миграция данных и проектирование интерфейсов между легаси-системой и микросервисом."
+pubDate: 2026-01-25
+tags: ["Oracle", "SQL", "REST API", "Интеграции"]
+category: "IT-сервисы"
+github: "https://github.com/styazhkoV/styazhkov.github.io"
+kpi:
+  - "99.9% uptime интеграционного слоя"
+  - "< 500 мс среднее время обработки"
+  - "0 потерянных транзакций за 6 месяцев"
+diagram: |
+  flowchart LR
+    A[Oracle Legacy] -->|CDC| B[Integration]
+    B --> C[REST API]
+---
+
+import Mermaid from "../../components/Mermaid.astro";
+
+## Проблема
+
+Устаревший модуль на **Oracle** не мог эффективно обмениваться данными с новым микросервисом через REST API. Нужны были real-time синхронизация, минимальная нагрузка на legacy и отказоустойчивые retry.
+
+## Решение
+
+Выбран паттерн **Change Data Capture (CDC)** с Oracle Streams. Спроектированы методы:
+
+- `GET /api/v1/transaction/{id}`
+- `POST /api/v1/transaction`
+
+Стек: SQL, REST API, Swagger, логирование ошибок, exponential backoff.
+
+<Mermaid code={`sequenceDiagram
+  participant L as Legacy Oracle
+  participant I as Integration
+  participant M as Microservice
+  L->>I: CDC event
+  I->>M: POST /transaction
+  M-->>I: 201 Created
+  I->>L: ack / status`} />
+
+## Результаты (KPI)
+
+- **99.9%** uptime интеграционного слоя
+- **&lt; 500ms** среднее время обработки
+- **0** потерянных транзакций за 6 месяцев
+
+## Код и артефакты
+
+Репозиторий портфолио и примеры спецификаций: [GitHub](https://github.com/styazhkoV/styazhkov.github.io)

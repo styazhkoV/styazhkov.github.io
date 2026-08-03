@@ -1,0 +1,81 @@
+---
+import skills from "../data/skills.json";
+import Mermaid from "./Mermaid.astro";
+
+const activityDiagram = `flowchart LR
+  A[Сбор требований] --> B[Моделирование]
+  B --> C[Документация]
+  C --> D[Тестирование]
+  D --> E[Внедрение]`;
+---
+
+<section id="skills" class="section bg-secondary">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="section-title">Ключевые навыки</h2>
+      <p class="section-subtitle mx-auto">
+        Инструменты и методологии по категориям — наведите на карточку для
+        пояснения
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      {
+        skills.map((group) => (
+          <div class="card p-6">
+            <h3 class="text-lg font-bold text-primary mb-4">{group.category}</h3>
+            <div class="flex flex-wrap gap-3">
+              {group.skills.map((skill) => (
+                <div class="skill-card group relative">
+                  <span class="skill-badge cursor-help">{skill.name}</span>
+                  <div class="skill-tooltip">{skill.hint}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <h3 class="text-center text-lg font-bold mb-4 text-primary">
+        Activity Diagram: цикл работы аналитика
+      </h3>
+      <Mermaid code={activityDiagram} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .skill-card {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .skill-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 0.5rem);
+    transform: translateX(-50%) translateY(4px);
+    min-width: 220px;
+    max-width: 280px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 20;
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.25);
+  }
+
+  .skill-card:hover .skill-tooltip,
+  .skill-card:focus-within .skill-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>

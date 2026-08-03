@@ -1,0 +1,96 @@
+---
+import experience from "../data/experience.json";
+import Mermaid from "./Mermaid.astro";
+---
+
+<section id="experience" class="section bg-primary">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="section-title">Опыт работы</h2>
+      <p class="section-subtitle mx-auto">
+        Timeline 2013 → 2026. Нажмите на позицию, чтобы раскрыть задачи, стек,
+        KPI и диаграмму
+      </p>
+    </div>
+
+    <div class="space-y-0">
+      {
+        experience.map((job, index) => (
+          <div class="timeline-item">
+            <details class="card overflow-hidden group" open={index === 0}>
+              <summary class="p-6 cursor-pointer list-none flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                <div>
+                  <h3 class="text-lg font-bold text-primary">{job.title}</h3>
+                  <p class="text-accent font-medium">{job.company}</p>
+                </div>
+                <span class="tag self-start">{job.period}</span>
+              </summary>
+
+              <div class="px-6 pb-6 border-t border-themed pt-4 space-y-5">
+                <p class="text-secondary text-sm">{job.summary}</p>
+
+                <div>
+                  <h4 class="font-semibold text-primary mb-2">Задачи</h4>
+                  <ul class="list-disc list-inside text-secondary text-sm space-y-1">
+                    {job.tasks.map((task) => (
+                      <li>{task}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-primary mb-2">
+                    Технический стек
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    {job.stack.map((item) => (
+                      <span class="tag">{item}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-primary mb-2">Результаты (KPI)</h4>
+                  <ul class="list-disc list-inside text-secondary text-sm space-y-1">
+                    {job.kpi.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-primary mb-2">UML / схема</h4>
+                  <Mermaid code={job.diagram} />
+                </div>
+              </div>
+            </details>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details summary::after {
+    content: "+";
+    margin-left: auto;
+    font-weight: 700;
+    color: var(--color-accent);
+    font-size: 1.25rem;
+  }
+
+  details[open] summary::after {
+    content: "−";
+  }
+
+  @media (min-width: 768px) {
+    details summary {
+      align-items: center;
+    }
+  }
+</style>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://styazhkov.github.io/sitemap-index.xml

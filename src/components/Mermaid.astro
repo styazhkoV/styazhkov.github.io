@@ -1,0 +1,56 @@
+---
+interface Props {
+  code: string;
+  class?: string;
+}
+
+const { code, class: className = "" } = Astro.props;
+const diagramId = `mmd-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div
+  class:list={["mermaid-wrap", className]}
+  data-mermaid-id={diagramId}
+>
+  <pre class="mermaid">{code}</pre>
+</div>
+
+<style>
+  .mermaid-wrap {
+    width: 100%;
+    overflow-x: auto;
+    padding: 1rem;
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+  }
+
+  .mermaid-wrap :global(svg) {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+</style>
+
+<script>
+  import mermaid from "mermaid";
+
+  const isDark = () => document.documentElement.classList.contains("dark");
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: isDark() ? "dark" : "neutral",
+    securityLevel: "loose",
+    fontFamily: "Inter, system-ui, sans-serif",
+  });
+
+  async function renderAll() {
+    const nodes = document.querySelectorAll(".mermaid");
+    if (nodes.length) {
+      await mermaid.run({ nodes: [...nodes] as any });
+    }
+  }
+
+  renderAll();
+</script>

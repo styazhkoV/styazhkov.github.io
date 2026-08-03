@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Блог и кейсы | Александр Стяжков"
+  description="Проекты системного аналитика: финтех, IT-сервисы, социальные инициативы."
+>
+  <section class="section bg-primary">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h1 class="section-title">Блог / кейсы</h1>
+        <p class="section-subtitle mx-auto">
+          Каждый пост — проект: проблема, решение с UML, KPI и ссылка на GitHub
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          posts.map((post) => (
+            <a href={`${baseUrl}blog/${post.id}/`} class="card p-6 block group">
+              <span class="tag mb-3">{post.data.category}</span>
+              <h2 class="text-lg font-bold text-primary group-hover:text-gradient mb-2">
+                {post.data.title}
+              </h2>
+              <p class="text-secondary text-sm mb-4">{post.data.description}</p>
+              <span class="text-accent text-sm font-semibold">Читать →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

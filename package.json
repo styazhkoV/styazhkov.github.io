@@ -11,6 +11,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^7.0.6",
     "mermaid": "^10.9.5",
@@ -38,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/styazhkoV/styazhkov.github.io/issues"
   },
-  "homepage": "https://github.com/styazhkoV/styazhkov.github.io#readme"
+  "homepage": "https://github.com/styazhkoV/styazhkov.github.io#readme",
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
 }

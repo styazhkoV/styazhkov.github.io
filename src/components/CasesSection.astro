@@ -1,0 +1,130 @@
+---
+import Mermaid from "./Mermaid.astro";
+
+interface CaseItem {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  category: string;
+  tags: string[];
+  kpi: string[];
+  diagram?: string;
+}
+
+interface Props {
+  cases: CaseItem[];
+}
+
+const { cases } = Astro.props;
+const categories = ["Все", "Финтех", "IT-сервисы", "Социальные проекты"];
+---
+
+<section id="cases" class="section bg-secondary">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-8">
+      <h2 class="section-title">Мои кейсы</h2>
+      <p class="section-subtitle mx-auto">
+        Проекты с KPI и мини-схемами. Фильтр по категориям
+      </p>
+    </div>
+
+    <div
+      class="flex flex-wrap justify-center gap-2 mb-10"
+      id="case-filters"
+      role="tablist"
+    >
+      {
+        categories.map((cat, i) => (
+          <button
+            type="button"
+            class:list={[
+              "case-filter-btn btn btn-secondary text-sm py-2 px-4",
+              i === 0 && "is-active",
+            ]}
+            data-filter={cat}
+          >
+            {cat}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="cases-grid">
+      {
+        cases.map((item) => (
+          <article
+            class="card p-6 case-card flex flex-col"
+            data-category={item.category}
+          >
+            <span class="tag self-start mb-3">{item.category}</span>
+            <h3 class="text-lg font-bold text-primary mb-2">{item.title}</h3>
+            <p class="text-secondary text-sm mb-4 line-clamp-3">
+              {item.description}
+            </p>
+
+            {item.diagram && <Mermaid code={item.diagram} class="mb-4" />}
+
+            {
+              item.kpi.length > 0 && (
+                <ul class="text-sm text-secondary mb-4 space-y-1 flex-1">
+                  {item.kpi.slice(0, 2).map((k) => (
+                    <li class="flex gap-2">
+                      <span class="text-accent">▸</span>
+                      <span>{k}</span>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              {item.tags.slice(0, 3).map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+
+            <a href={item.href} class="btn btn-primary self-start mt-auto">
+              Подробнее
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .case-filter-btn.is-active {
+    background: linear-gradient(
+      135deg,
+      var(--color-gradient-start),
+      var(--color-gradient-end)
+    );
+    color: white;
+    border-color: transparent;
+  }
+
+  .case-card.is-hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll(".case-filter-btn");
+  const cards = document.querySelectorAll(".case-card");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+      buttons.forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+
+      cards.forEach((card) => {
+        const cat = card.getAttribute("data-category");
+        const show = filter === "Все" || cat === filter;
+        card.classList.toggle("is-hidden", !show);
+      });
+    });
+  });
+</script>
