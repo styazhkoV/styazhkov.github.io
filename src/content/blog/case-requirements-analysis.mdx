@@ -28,12 +28,16 @@ import Mermaid from "../../components/Mermaid.astro";
 
 Стек: UML Use Case, User Stories, Figma, Jira, Confluence, матрица трассировки.
 
-<Mermaid code={`usecaseDiagram
-  actor Клиент
-  Клиент --> (Авторизация)
-  Клиент --> (Перевод)
-  Клиент --> (История операций)
-  Клиент --> (Шаблоны платежей)`} />
+<Mermaid code={`flowchart LR
+  Client((Клиент))
+  UC1([Авторизация])
+  UC2([Перевод])
+  UC3([История операций])
+  UC4([Шаблоны платежей])
+  Client --> UC1
+  Client --> UC2
+  Client --> UC3
+  Client --> UC4`} />
 
 ## Результаты (KPI)
 
