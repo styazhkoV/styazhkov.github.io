@@ -1,76 +1,99 @@
 [
   {
-    "id": "sa-2022",
-    "title": "Системный аналитик",
-    "company": "IT / финтех (NDA)",
-    "period": "2022 — 2026",
-    "summary": "Интеграции, API-спецификации, моделирование процессов в банковских и IT-сервисах.",
+    "id": "rbc-bank",
+    "title": "Senior System & Integration Analyst",
+    "company": "Финтех / Core Banking (NDA)",
+    "period": "2023 — 2025",
+    "summary": "Проектирование integrations, API contracts, data mapping, onboarding flows and operational support for digital banking services.",
     "tasks": [
-      "Проектирование REST API и интеграционных потоков (CDC, очереди)",
-      "Сбор и трассировка требований, SRS / user stories в Jira",
-      "Согласование со стейкхолдерами, безопасность и UAT"
+      "Проектирование обмена данных между фронт-системами, ESB и АБИС",
+      "Настройка интеграций с госсервисами и внешними партнёрами",
+      "Аудит данных, SQL-расследования и локализация инцидентов онбординга",
+      "Разработка user flow, прототипов и процессов валютного контроля"
     ],
-    "stack": ["BPMN", "UML", "REST API", "Swagger", "SQL", "Oracle", "Jira", "Confluence"],
+    "stack": ["REST API", "SOAP/XML", "OpenAPI", "ESB", "PostgreSQL", "Oracle", "SQL", "DBeaver", "Figma", "BPMN", "Java/WebSphere"],
     "kpi": [
-      "99.9% uptime интеграционного слоя",
-      "< 500 мс среднее время обработки транзакции",
-      "0 потерянных транзакций за 6 месяцев"
+      "Запущен сквозной онлайн-онбординг для ИП через госуслуги",
+      "Автоматизирован валютный контроль и исключён ручной мониторинг репатриации",
+      "Улучшена стабильность ЭДО за счёт устранения ошибок payload и синхронизации БД"
     ],
-    "diagram": "flowchart LR\n  A[Legacy Oracle] -->|CDC| B[Integration Layer]\n  B --> C[REST Microservice]\n  C --> D[Consumers]"
+    "diagram": "flowchart LR\n  A[Client] --> B[Digital onboarding]\n  B --> C[ESB]\n  C --> D[Core banking]\n  D --> E[External services]\n  E --> F[Status + compliance]"
   },
   {
-    "id": "ba-2020",
-    "title": "Бизнес-аналитик",
-    "company": "Финтех / мобильный банкинг (NDA)",
-    "period": "2020 — 2022",
-    "summary": "Редизайн мобильного банка: требования, прототипы, критерии приёмки.",
+    "id": "eurasian-bank",
+    "title": "Lead Expert / Product Analyst",
+    "company": "Финтех / Digital Lending (NDA)",
+    "period": "2022 — 2023",
+    "summary": "Requirements analysis, business process design and API contracts for online auto lending and credit decision flows.",
     "tasks": [
-      "Интервью со стейкхолдерами и анализ обратной связи пользователей",
-      "User stories, use cases, lo-fi прототипы с UX",
-      "Матрица трассировки требований и глоссарий"
+      "Сбор и формализация требований для онлайн-автокредитования",
+      "Моделирование BPMN, схем данных и контрактов REST API",
+      "Согласование решений с комплаенс и риск-менеджментом",
+      "Проведение UAT и проверка данных через ELK и SQL"
     ],
-    "stack": ["UML", "User Stories", "Figma", "Jira", "Confluence"],
+    "stack": ["BPMN", "OpenAPI/Swagger", "Postman", "Oracle", "SQL", "ELK", "CredoAPI", "BRD", "SRS"],
     "kpi": [
-      "87% успешных сценариев перевода в юзабилити-тестах",
-      "Время перевода 2:30 → 0:45",
-      "34 user stories в Jira"
+      "Запуск сервиса онлайн-автокредитования без ЭЦП и биометрии",
+      "Сокращение цикла обработки заявки на ~30% за счёт единой анкеты",
+      "Рост количества заявок на ~22% благодаря ночным заявкам"
     ],
-    "diagram": "flowchart TD\n  PO[Product Owner] --> BA[Бизнес-аналитик]\n  UX[UX] --> BA\n  BA --> DEV[Backend]\n  BA --> QA[UAT]"
+    "diagram": "flowchart TD\n  A[Client app] --> B[Validation]\n  B --> C[Oracle]\n  C --> D[Decision engine]\n  D --> E[Approval / rejection]"
   },
   {
-    "id": "ja-2018",
-    "title": "Аналитик / Junior SA",
-    "company": "Консалтинг и IT-сервисы",
-    "period": "2018 — 2020",
-    "summary": "Документирование процессов, ТЗ, поддержка внедрения.",
+    "id": "bp-contact",
+    "title": "System Analyst",
+    "company": "IT / platform products (NDA)",
+    "period": "2020 — 2021",
+    "summary": "Полный цикл создания digital-платформы: от идеи и требований до запуска и UAT.",
     "tasks": [
-      "Описание as-is процессов и подготовка ТЗ",
-      "Участие в интеграционном и регрессионном тестировании",
-      "Ведение документации в Confluence"
+      "Сбор, приоритизация и документирование требований для продукта",
+      "Моделирование бизнес-процессов As-Is / To-Be и сценариев использования",
+      "Управление backlog в Jira и координация cross-functional команды",
+      "Проверка REST API и пользовательских сценариев через Postman и лог-трекинг"
     ],
-    "stack": ["BPMN", "IDEF0", "SQL", "Postman", "Confluence"],
+    "stack": ["Jira", "Confluence", "BPMN", "User Stories", "UML", "REST API", "Postman", "Figma"],
     "kpi": [
-      "Снижение числа уточнений к ТЗ на 30%",
-      "Единый шаблон спецификаций для команды"
+      "Платформа успешно запущена в промышленную эксплуатацию",
+      "Сокращение time-to-market за счёт прозрачного управления backlog",
+      "Удобный функционал для трёх типов пользователей: граждане, бизнес, регулятор"
     ],
-    "diagram": "flowchart LR\n  R[Требования] --> D[Документация]\n  D --> T[Тестирование]\n  T --> G[Go-live]"
+    "diagram": "flowchart LR\n  A[Customer] --> B[Platform]\n  B --> C[Business processes]\n  C --> D[Operations]\n  D --> E[Reporting]"
   },
   {
-    "id": "start-2013",
-    "title": "Старт в аналитике и IT",
-    "company": "Проекты и поддержка систем",
-    "period": "2013 — 2018",
-    "summary": "Накопление опыта в предметных областях, данных и сопровождении систем.",
+    "id": "covid-analytics",
+    "title": "Business Analyst / BI Analyst",
+    "company": "Public sector / healthcare analytics",
+    "period": "2019 — 2020",
+    "summary": "Аналитика и dashboarding для принятия решений в условиях кризиса, отчётность по данным из медицинских учреждений.",
     "tasks": [
-      "Работа с данными и отчётностью",
-      "Участие в внедрениях и сопровождении",
-      "Освоение SQL, документации и коммуникации с бизнесом"
+      "Сбор агрегированных данных из медучреждений и подготовка отчётности",
+      "Разработка дашбордов в Power BI и Excel для штаба управления",
+      "Формализация показателей и регулярных отчётов для руководства"
     ],
-    "stack": ["SQL", "Excel", "Документация", "Поддержка"],
+    "stack": ["Power BI", "Excel", "Data analysis", "Dashboards", "Reporting"],
     "kpi": [
-      "10+ лет накопленного опыта к 2026",
-      "Переход в системный / бизнес-анализ"
+      "Обеспечено оперативное принятие решений в реальном времени",
+      "Повышена точность и скорость аналитики в условиях кризиса"
     ],
-    "diagram": "flowchart TD\n  S[Поддержка] --> D[Данные]\n  D --> A[Аналитика]\n  A --> SA[Системный анализ]"
+    "diagram": "flowchart TD\n  A[Medical data] --> B[ETL / consolidation]\n  B --> C[Dashboard]\n  C --> D[Management decisions]"
+  },
+  {
+    "id": "automation-2016",
+    "title": "Business Analyst / Web Developer",
+    "company": "Media / digital processes / CRM",
+    "period": "2014 — 2019",
+    "summary": "Процессы, CRM, автоматизация публикаций и доработки digital-сервисов в медиа и консалтинге.",
+    "tasks": [
+      "Анализ процессов редакции и доработка CRM-решений",
+      "Верстка и публикация контента на HTML/CSS/JavaScript",
+      "Подготовка ТЗ, BPMN/IDEF0 и проектной документации",
+      "Работа с Excel, CRM и процессами для управления клиентским потоком"
+    ],
+    "stack": ["BPMN", "IDEF0", "CRM", "HTML", "CSS", "JavaScript", "Excel", "Requirements"],
+    "kpi": [
+      "Автоматизация публикаций ускорила процесс работы редакции",
+      "Оптимизированы CRM-процессы и улучшена прозрачность воронки продаж"
+    ],
+    "diagram": "flowchart LR\n  A[Content requests] --> B[Process analysis]\n  B --> C[CRM + templates]\n  C --> D[Publishing + reporting]"
   }
 ]

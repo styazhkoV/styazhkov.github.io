@@ -20,14 +20,13 @@ const heroUseCase = `flowchart LR
   Ana((Аналитик))
 
   subgraph Site["Портфолио"]
-    UC1([Просмотр Hero-экрана])
-    UC2([Изучение Навыков])
-    UC3([Просмотр Сертификатов])
-    UC4([Просмотр Опыт работы])
-    UC5([Открытие Кейсов])
-    UC6([Чтение Блога])
-    UC7([Связь через Контакты])
-    UC8([Обновление контента])
+    UC1([См. доминирующие стек и опыт])
+    UC2([Изучение навыков])
+    UC3([Просмотр сертификатов])
+    UC4([Ознакомление с кейсами])
+    UC5([Чтение продукта/интеграционных статей])
+    UC6([Связь по проекту])
+    UC7([Проверка применимых решений])
   end
 
   Emp --> UC1
@@ -36,9 +35,8 @@ const heroUseCase = `flowchart LR
   Emp --> UC4
   Emp --> UC5
   Emp --> UC6
-  Emp --> UC7
-  UC6 -->|Переход к коду| Git
-  Ana --> UC8`;
+  UC5 -->|ссылка на код| Git
+  Ana --> UC7`;
 
 const cases = sortedPosts.map((post) => ({
   id: post.id,
@@ -70,13 +68,13 @@ const cases = sortedPosts.map((post) => ({
 
           <p class="text-accent font-semibold mb-2">Александр Стяжков</p>
           <h1 class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
-            Системный и бизнес-аналитик,<br />
-            <span class="text-gradient">10+ лет опыта в финтех и IT</span>
+            Senior System & Integration Analyst,<br />
+            <span class="text-gradient">10+ лет в финтех, банкинге и цифровых сервисах</span>
           </h1>
 
           <p class="text-lg text-secondary mb-8 max-w-xl">
-            Проектирую интеграции, моделирую бизнес-процессы и перевожу
-            требования в работающие решения с измеримым результатом.
+            Проектирую API, интеграции и процессы для цифровых продуктов: от
+            требований и BPMN до SQL-аналитики, UAT и запуска решений в продакшн.
           </p>
 
           <div class="flex flex-wrap gap-4">
